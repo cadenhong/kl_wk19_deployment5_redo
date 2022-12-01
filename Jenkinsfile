@@ -29,10 +29,12 @@ pipeline {
 
     stage ('Test') {
       steps {
-        sh '''#!/bin/bash
-        source test3/bin/activate
-        py.test --verbose --junit-xml test-reports/results.xml
-        ''' 
+        dir('url-shortener') {
+          sh '''#!/bin/bash
+          source test3/bin/activate
+          py.test --verbose --junit-xml test-reports/results.xml
+          ''' 
+        }
       }
       post {
         always {
