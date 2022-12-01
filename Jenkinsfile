@@ -28,11 +28,11 @@ pipeline {
           ''' 
         }
       }
-      post {
-        always {
-          junit '/var/lib/jenkins/workspace/dep5-redo_second/url-shortener/test-reports/results.xml'
-        }
-      }
+      // post {
+      //   always {
+      //     junit '/var/lib/jenkins/workspace/dep5-redo_second/url-shortener/test-reports/results.xml'
+      //   }
+      // }
     }
 
     // stage ('Create Container') {
