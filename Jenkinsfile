@@ -6,14 +6,24 @@ pipeline {
    stages {
     stage ('Build') {
       steps {
-        sh '''#!/bin/bash
-        python3 -m venv test3
-        source test3/bin/activate
-        pip install pip --upgrade
-        pip install -r requirements.txt
-        export FLASK_APP=application
-        flask run &
-        '''
+        dir('url-shortener') {
+          sh '''#!/bin/bash
+          python3 -m venv test3
+          source test3/bin/activate
+          pip install pip --upgrade
+          pip install -r requirements.txt
+          export FLASK_APP=application
+          flask run &
+          '''
+        }
+        // sh '''#!/bin/bash
+        // python3 -m venv test3
+        // source test3/bin/activate
+        // pip install pip --upgrade
+        // pip install -r requirements.txt
+        // export FLASK_APP=application
+        // flask run &
+        // '''
      }
     }
 
