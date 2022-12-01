@@ -24,13 +24,13 @@ pipeline {
         dir('url-shortener') {
           sh '''#!/bin/bash
           source test3/bin/activate
-          py.test --verbose --junit-xml /var/lib/jenkins/workspace/dep5-redo_second/url-shortener/test-reports/results.xml
+          py.test --verbose --junit-xml test-reports/results.xml
           ''' 
         }
       }
       post {
         always {
-          junit '/var/lib/jenkins/workspace/dep5-redo_second/url-shortener/test-reports/results.xml'
+          junit 'test-reports/results.xml'
         }
       }
     }
