@@ -43,9 +43,8 @@ pipeline {
     stage ('Push to Dockerhub') {
       agent { label 'dockerAgent' }
       steps {
-        withCredentials([usernamePassword(usernameVariable: 'dockerUser', passwordVariable: 'dockerPassword')]) {
           sh '''
-          docker login -u ${env.dockerUser} -p ${env.dockerPassword}
+          docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW
           docker build -t redo-urlshortener url-shortener
           '''
         }
@@ -64,4 +63,4 @@ pipeline {
         '''
       }
     }
-   }
+    
