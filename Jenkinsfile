@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+    DOCKER_CREDS = credentials('docker-creds')
+  }
    stages {
     stage ('Build') {
       steps {
@@ -39,12 +42,15 @@ pipeline {
 
     stage ('Push to Dockerhub') {
       agent { label 'dockerAgent' }
-    //  steps {
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-creds') {
-          def urlshortenerImage = docker.build("redo-urlshortener", "url-shortener")
-          urlshortenerImage.push()
+      steps {
+        withCredentials([usernamePassword(usernameVariable: DOCKER_CREDS_USR, passwordVariable: DOCKER_CREDS_PSW)]) {
+          docker build -t redo-urlshortener url-shortener
         }
-    //  }
+        //docker.withRegistry('https://registry.hub.docker.com', 'docker-creds') {
+        //  def urlshortenerImage = docker.build("redo-urlshortener", "url-shortener")
+        //  urlshortenerImage.push()
+        }
+      }
     }
 
     stage ('Deploy to ECS') {
