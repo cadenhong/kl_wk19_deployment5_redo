@@ -43,8 +43,11 @@ pipeline {
     stage ('Push to Dockerhub') {
       agent { label 'dockerAgent' }
       steps {
-        withCredentials([usernamePassword(usernameVariable: DOCKER_CREDS_USR, passwordVariable: DOCKER_CREDS_PSW)]) {
+        withCredentials([usernamePassword(usernameVariable: 'dockerUser', passwordVariable: 'dockerPassword')]) {
+          sh '''
+          docker login -u ${env.dockerUser} -p ${env.dockerPassword}
           docker build -t redo-urlshortener url-shortener
+          '''
         }
         //docker.withRegistry('https://registry.hub.docker.com', 'docker-creds') {
         //  def urlshortenerImage = docker.build("redo-urlshortener", "url-shortener")
