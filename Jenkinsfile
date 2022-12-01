@@ -39,12 +39,12 @@ pipeline {
 
     stage ('Push to Dockerhub') {
       agent { label 'dockerAgent' }
-      steps {
+    //  steps {
         docker.withRegistry('https://registry.hub.docker.com', 'docker-creds') {
           def urlshortenerImage = docker.build("redo-urlshortener", "url-shortener")
           urlshortenerImage.push()
         }
-      }
+    //  }
     }
 
     stage ('Deploy to ECS') {
