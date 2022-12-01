@@ -16,14 +16,6 @@ pipeline {
           flask run &
           '''
         }
-        // sh '''#!/bin/bash
-        // python3 -m venv test3
-        // source test3/bin/activate
-        // pip install pip --upgrade
-        // pip install -r requirements.txt
-        // export FLASK_APP=application
-        // flask run &
-        // '''
      }
     }
 
@@ -32,7 +24,7 @@ pipeline {
         dir('url-shortener') {
           sh '''#!/bin/bash
           source test3/bin/activate
-          py.test --verbose --junit-xml test-reports/results.xml
+          py.test --verbose --junit-xml /var/lib/jenkins/workspace/dep5-redo_second/url-shortener/test-reports/results.xml
           ''' 
         }
       }
