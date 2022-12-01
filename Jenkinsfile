@@ -30,7 +30,7 @@ pipeline {
       }
       post {
         always {
-          junit 'test-reports/results.xml'
+          junit '/var/lib/jenkins/workspace/dep5-redo_second/url-shortener/test-reports/results.xml'
         }
       }
     }
