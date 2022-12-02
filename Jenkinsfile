@@ -56,7 +56,7 @@ pipeline {
         }
         }
       
-    }
+    
 
     stage ('Deploy to ECS') {
       agent { label 'tfAgent' }
@@ -74,5 +74,6 @@ pipeline {
                           }
                         }
         }
+      }
   }
 }
