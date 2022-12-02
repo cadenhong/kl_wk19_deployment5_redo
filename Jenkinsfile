@@ -50,8 +50,9 @@ pipeline {
           sh '''
           docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW
           docker build -t redo-urlshortener:${BUILD_NUMBER} url-shortener
-          docker tag redo-urlshortener:${BUILD_NUMBER} ch316/redo-urlshortener:${BUILD_NUMBER}
-
+          docker tag redo-urlshortener:${BUILD_NUMBER} 
+          docker push ch316/redo-urlshortener:${BUILD_NUMBER}
+          docker images
           '''
         }
         }
