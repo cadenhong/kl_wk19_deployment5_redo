@@ -30,7 +30,7 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
   [
   {
       "name": "url-container",
-      "image": "tsanderson77/classact:latest",
+      "image": "ch316/redo-urlshortener:25",
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
@@ -41,7 +41,7 @@ resource "aws_ecs_task_definition" "aws-ecs-task" {
       },
       "portMappings": [
         {
-          "containerPort": 5000
+          "containerPort": 8000
         }
       ]
     }
@@ -79,7 +79,7 @@ resource "aws_ecs_service" "aws-ecs-service" {
   load_balancer {
     target_group_arn = aws_lb_target_group.url-app.arn
     container_name   = "url-container"
-    container_port   = 5000
+    container_port   = 8000
   }
 
 }

@@ -8,7 +8,7 @@ resource "aws_subnet" "public_a" {
   availability_zone = "us-east-1a"
 
   tags = {
-    "Name" = "public | us-east-1a"
+    "Name" = "public a | us-east-1a"
   }
 }
 
@@ -18,7 +18,7 @@ resource "aws_subnet" "private_a" {
   availability_zone = "us-east-1a"
 
   tags = {
-    "Name" = "private | us-east-1a"
+    "Name" = "private a | us-east-1a"
   }
 }
 
@@ -28,7 +28,7 @@ resource "aws_subnet" "public_b" {
   availability_zone = "us-east-1b"
 
   tags = {
-    "Name" = "public | us-east-1b"
+    "Name" = "public b | us-east-1b"
   }
 }
 
@@ -38,7 +38,7 @@ resource "aws_subnet" "private_b" {
   availability_zone = "us-east-1b"
 
   tags = {
-    "Name" = "private | us-east-1b"
+    "Name" = "private b | us-east-1b"
   }
 }
 
@@ -122,7 +122,7 @@ resource "aws_security_group" "ingress_app" {
 
   ingress {
     from_port   = 5000
-    to_port     = 5000
+    to_port     = 8000
     protocol    = "TCP"
     cidr_blocks = ["0.0.0.0/0"]
   }

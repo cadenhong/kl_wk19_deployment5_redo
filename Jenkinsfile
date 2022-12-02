@@ -35,21 +35,20 @@ pipeline {
       // }
     }
 
-    // stage ('Create Container') {
-    //   agent { label 'dockerAgent' }
-    //   steps {
-    //     def urlshortenerImage = docker.build("redo-urlshortener", "url-shortener")
-    //     // docker build -t redo-urlshortener url-shortener
-    //     urlshortenerImage.push()
-    //   }
-    // }
+    stage ('Create Container') {
+      agent { label 'dockerAgent' }
+      steps {
+        sh '''
+        docker build -t redo-urlshortener:${BUILD_NUMBER} url-shortener
+        '''
+      }
+    }
 
     stage ('Push to Dockerhub') {
       agent { label 'dockerAgent' }
       steps {
           sh '''
           docker login -u $DOCKER_CREDS_USR -p $DOCKER_CREDS_PSW
-          docker build -t redo-urlshortener:${BUILD_NUMBER} url-shortener
           docker tag redo-urlshortener:${BUILD_NUMBER} ch316/redo-urlshortener:${BUILD_NUMBER}
           docker push ch316/redo-urlshortener:${BUILD_NUMBER}
           docker images
